@@ -12,6 +12,7 @@ public class Domino
     }
 
     public static int getS1()
+
     {
         return s1;
     }
