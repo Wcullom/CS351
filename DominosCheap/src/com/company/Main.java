@@ -19,31 +19,29 @@ public class Main extends Application {
     public static void main(String[] args) {
 
 
-
-        for(int i=0; i<7; i++){
-            for(int j=0; j<7; j++){
-                Domino domino = new Domino(i,j);
-                if(!tiles.contains(domino)){
-                    tiles.add(domino);
-
-
-
-                    
         //Create an array list of tiles
         ArrayList<Domino> playhand = new ArrayList<Domino>();
         ArrayList<Domino> comphand = new ArrayList<Domino>();
         ArrayList<Domino> boneyard = new ArrayList<Domino>();
         Button dombtns[] = new Button[28];
-        for (int i = 0; i < 6; i++) {
-            for (int j = 6; j > 0; j--) {
-                Domino tmp = new Domino(j, i);
-                if (boneyard.contains(tmp)) {
-                    boneyard.remove(tmp);
+
+        for(int i=0; i < 6; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                Domino tmp = new Domino(i,j);
+                if(!boneyard.contains(tmp))
+                {
+                    boneyard.add(tmp);
+                    System.out.println(Domino.getS1() + " " + Domino.getS2());
                 }
-                boneyard.add(new Domino(i, j));
-                System.out.println(Domino.getS1() + " " + Domino.getS2());
             }
         }
+
+
+
+
+
         launch(args);
     }
 
