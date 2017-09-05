@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
+import static javafx.application.Platform.exit;
 
 
 public class Main extends Application {
@@ -25,25 +26,32 @@ public class Main extends Application {
         ArrayList<Domino> boneyard = new ArrayList<Domino>();
         Button dombtns[] = new Button[28];
 
-        for(int i=0; i < 6; i++)
+        for(int i=0; i <= 6; i++)
         {
-            for (int j = 0; j < 6; j++)
+            for (int j = 0; j <= 6; j++)
             {
                 Domino tmp = new Domino(i,j);
+                Domino flp = new Domino(j,i);
+
                 if(!boneyard.contains(tmp))
                 {
                     boneyard.add(tmp);
-                    System.out.println(Domino.getS1() + " " + Domino.getS2());
                 }
+                else if(boneyard.contains(flp))
+                {
+                    boneyard.remove(tmp);
+                }
+                else
+                {
+                    exit();
+
+                }
+                System.out.println(Domino.getS1() + " " + Domino.getS2());
             }
         }
-
-
-
-
-
         launch(args);
     }
+
 
     @Override
     public void start(Stage window) {
@@ -63,7 +71,7 @@ public class Main extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(btn);
         window.setScene(new Scene(root, 700, 700));
-        window.show();
+   //     window.show();
     }
 }
 
