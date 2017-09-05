@@ -18,6 +18,17 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
+
+
+        for(int i=0; i<7; i++){
+            for(int j=0; j<7; j++){
+                Domino domino = new Domino(i,j);
+                if(!tiles.contains(domino)){
+                    tiles.add(domino);
+
+
+
+                    
         //Create an array list of tiles
         ArrayList<Domino> playhand = new ArrayList<Domino>();
         ArrayList<Domino> comphand = new ArrayList<Domino>();
@@ -34,12 +45,6 @@ public class Main extends Application {
             }
         }
         launch(args);
-    }
-
-
-    private void addPlayHand(Domino domino)
-    {
-        
     }
 
     @Override
