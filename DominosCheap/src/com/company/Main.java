@@ -1,6 +1,6 @@
 package com.company;
 
-import com.sun.java.browser.plugin2.DOM;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
