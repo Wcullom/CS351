@@ -2,8 +2,8 @@ package com.company;
 
 public class Domino
 {
-    private static int s1;
-    private static int s2;
+    private int s1;
+    private int s2;
 
     public Domino(int s1, int s2)
     {
@@ -11,7 +11,7 @@ public class Domino
         this.s2 = s2;
     }
 
-    public static int getS1()
+    public int getS1()
 
     {
         return s1;
@@ -22,7 +22,7 @@ public class Domino
         this.s1 = ns1;
     }
 
-    public static int getS2()
+    public int getS2()
     {
         return s2;
     }
