@@ -1,4 +1,4 @@
-package com.company;
+package com.DominosCS351;
 
 
 public class Domino
