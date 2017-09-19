@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -31,14 +32,19 @@ public class Boggle extends Application {
   }
 
   private void startScene() {
-    StackPane startLayout = new StackPane();
+    FlowPane startLayout = new FlowPane();
     startLayout.setAlignment(Pos.CENTER);
 
-    Button startButton = new Button("New Game");
-    startButton.setPrefWidth(150);
-    startButton.setOnAction(e -> gameScene());
+    Button Four_Button = new Button("4x4 Tray");
 
-    startLayout.getChildren().add(startButton);
+    Button Five_Button = new Button("5x5 Tray");
+    Four_Button.setPrefWidth(150);
+    Four_Button.setOnAction(e -> gameScene_Four());
+
+    Five_Button.setPrefWidth(150);
+    Five_Button.setOnAction(e -> gameScene_Five());
+
+    startLayout.getChildren().addAll(Five_Button,Four_Button);
 
     Scene startScene = new Scene(startLayout, 750, 500);
 
@@ -46,11 +52,15 @@ public class Boggle extends Application {
     window.show();
   }
 
-  private void gameScene() {
+  private void gameScene_Four() {
     mainController();
   }
-  public void mainController()
-  {
+
+  private void gameScene_Five() {
+    mainController();
+  }
+
+  public void mainController() {
     Scanner sc = new Scanner(System.in);
     System.out.println("What word are you checking the dictionary for?");
     String playword = sc.next();
