@@ -19,7 +19,8 @@ import java.util.Scanner;
 public class Boggle extends Application {
 
   private Stage window;
-
+  char chararray[][] = new char[4][4];
+  char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
   public static void main(String[] args) {
     launch(args);
   }
@@ -32,6 +33,23 @@ public class Boggle extends Application {
     startScene();
 
   }
+
+  private void populate_array4()
+  { 
+    for(int i = 0; i < 4; i++)
+    {
+       for(int j = 0; j < 4; j++)
+       {
+        Random rand = new Random();
+        int x = rand.nextInt(alphabet.size());
+        
+
+
+
+       }
+    }
+
+  } 
 
   private void startScene() {
     FlowPane startLayout = new FlowPane();
