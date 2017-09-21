@@ -1,9 +1,12 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -16,7 +19,6 @@ import java.util.Scanner;
 public class Boggle extends Application {
 
   private Stage window;
-  private ArrayList<String> words;
 
   public static void main(String[] args) {
     launch(args);
@@ -39,10 +41,12 @@ public class Boggle extends Application {
 
     Button Five_Button = new Button("5x5 Tray");
     Four_Button.setPrefWidth(150);
-    Four_Button.setOnAction(e -> gameScene_Four());
+    Four_Button.setOnAction(e ->
+            mainController(4));
 
     Five_Button.setPrefWidth(150);
-    Five_Button.setOnAction(e -> gameScene_Five());
+    Five_Button.setOnAction(e ->
+            mainController(5));
 
     startLayout.getChildren().addAll(Five_Button,Four_Button);
 
@@ -52,21 +56,17 @@ public class Boggle extends Application {
     window.show();
   }
 
-  private void gameScene_Four() {
-    mainController();
-  }
+  private void mainController(int traySize) {
+    Scene gameScene;
+    BorderPane rootPane = new BorderPane();
+    GridPane gameTray = new GridPane();
 
-  private void gameScene_Five() {
-    mainController();
-  }
-
-  public void mainController() {
-    Scanner sc = new Scanner(System.in);
-    System.out.println("What word are you checking the dictionary for?");
-    String playword = sc.next();
-    words = new ArrayList<>();
+    //Scanner sc = new Scanner(System.in);
+    //System.out.println("What word are you checking the dictionary for?");
+    //String playword = sc.next();
+    ArrayList<String> words = new ArrayList<>();
     String filename = "Dictionary.txt";
-    String line = null;
+    String line;
     try
     {
       FileReader fileReader = new FileReader(filename);
@@ -85,7 +85,7 @@ public class Boggle extends Application {
     {
       System.out.println("Error reading file " + filename + " ");
     }
-
+    /*
     if(words.contains(playword))
     {
       System.out.println("The word '" + playword + "' does exist in the dictionary");
@@ -95,5 +95,22 @@ public class Boggle extends Application {
     {
       System.out.println("The word '" + playword + "' is not a word in the dictionary");
     }
+    */
+
+    for (int i = 0; i < traySize; i++){
+      for (int j = 0; j < traySize; j++) {
+        String letter = Character.toString((char)(65+i+j)); //to fill the buttons with a letter
+        ToggleButton button = new ToggleButton(letter);
+        button.setPrefSize(45,45);
+        button.setFont(Font.font(20));
+        gameTray.add(button,i,j);
+      }
+    }
+
+    gameTray.setAlignment(Pos.CENTER);
+    rootPane.setCenter(gameTray);
+    gameScene = new Scene(rootPane, 800, 800);
+    window.setScene(gameScene);
+    window.show();
   }
 }
