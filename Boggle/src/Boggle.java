@@ -3,8 +3,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -14,11 +13,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Boggle extends Application {
 
+
   private Stage window;
+  private String playword;
+  private ArrayList<String> words;
+  private TextField wordSearch;
 
   public static void main(String[] args) {
     launch(args);
@@ -61,10 +65,15 @@ public class Boggle extends Application {
     BorderPane rootPane = new BorderPane();
     GridPane gameTray = new GridPane();
 
-    //Scanner sc = new Scanner(System.in);
-    //System.out.println("What word are you checking the dictionary for?");
-    //String playword = sc.next();
-    ArrayList<String> words = new ArrayList<>();
+    HBox searchBox = new HBox();
+    wordSearch = new TextField();
+    Button submit = new Button("Submit");
+
+    wordSearch.setPromptText("Enter Word to Search For");
+    submit.setOnAction(e -> checkWord());
+    words = new ArrayList<>();
+
+    String[][] board = new String[traySize][traySize];
     String filename = "Dictionary.txt";
     String line;
     try
@@ -85,17 +94,6 @@ public class Boggle extends Application {
     {
       System.out.println("Error reading file " + filename + " ");
     }
-    /*
-    if(words.contains(playword))
-    {
-      System.out.println("The word '" + playword + "' does exist in the dictionary");
-
-    }
-    else
-    {
-      System.out.println("The word '" + playword + "' is not a word in the dictionary");
-    }
-    */
 
     for (int i = 0; i < traySize; i++){
       for (int j = 0; j < traySize; j++) {
@@ -107,10 +105,40 @@ public class Boggle extends Application {
       }
     }
 
+    searchBox.getChildren().addAll(wordSearch,submit);
+    searchBox.setAlignment(Pos.CENTER);
+    rootPane.setBottom(searchBox);
+
     gameTray.setAlignment(Pos.CENTER);
     rootPane.setCenter(gameTray);
+
     gameScene = new Scene(rootPane, 800, 800);
     window.setScene(gameScene);
     window.show();
+  }
+
+  private void checkWord() {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Checked the Word");
+    alert.setHeaderText(null);
+
+    ButtonType buttonTypeOne = new ButtonType("OK");
+    playword = wordSearch.getText();
+
+    if(words.contains(playword))
+    {
+      alert.setContentText("The word '" + playword + "' does exist in the dictionary");
+
+    }
+    else
+    {
+      alert.setContentText("The word '" + playword + "' does NOT exist in the dictionary");
+    }
+
+    alert.getButtonTypes().setAll(buttonTypeOne);
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.get() == buttonTypeOne) {
+      alert.close();
+    }
   }
 }
