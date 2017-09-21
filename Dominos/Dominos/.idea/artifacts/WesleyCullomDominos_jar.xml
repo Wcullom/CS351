@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="WesleyCullomDominos:jar">
-    <output-path>$PROJECT_DIR$</output-path>
-    <root id="archive" name="DominosCheap.jar">
-      <element id="module-output" name="DominosCheap" />
-      <element id="dir-copy" path="$PROJECT_DIR$/src" />
-    </root>
-  </artifact>
-</component>
